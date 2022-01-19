@@ -13,6 +13,8 @@ import { ServersService } from './servers/servers.service';
 import { CanDeactivateGuard } from './servers/edit-server/can-deactivate-guard';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { ServerResolverService } from './servers/server/server-resolver.service';
+import { AccessControlModule } from './access-control/access-control.module';
+import {HttpClient, HttpClientModule} from '@angular/common/http'
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { ServerResolverService } from './servers/server/server-resolver.service'
     BrowserModule,
     AppRoutingModule,
     UsersModule,
-    ServersModule
+    ServersModule,
+    AccessControlModule,
+    HttpClientModule
   ],
   providers: [ServersService,AuthService,AuthGuard, CanDeactivateGuard,ServerResolverService],
   bootstrap: [AppComponent]
