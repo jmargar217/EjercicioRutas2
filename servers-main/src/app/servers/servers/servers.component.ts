@@ -18,7 +18,7 @@ export class ServersComponent implements OnInit {
     private userService:UserService) { }
 
   ngOnInit(): void {
-
+    /*
     if(this.userService.getToken() != null){
       this.servers = this.serversService.getServers();
 
@@ -26,6 +26,7 @@ export class ServersComponent implements OnInit {
       console.log("Error, no estas logueado");
       this.router.navigateByUrl('');
     }
+    */
   }
 
   onReload() {

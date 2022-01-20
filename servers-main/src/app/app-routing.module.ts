@@ -5,7 +5,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './auth-guard.service';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { HomeComponent } from './home/home.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { CanDeactivateGuard } from './servers/edit-server/can-deactivate-guard';
 import { EditServerComponent } from './servers/edit-server/edit-server.component';
 import { ServerResolverService } from './servers/server/server-resolver.service';
@@ -25,11 +24,15 @@ const routes: Routes = [
     { path: ':id/:name', component: UserComponent },
   ]
   },
-  { path: 'servers', component: ServersComponent, children: [
+
+
+  { path: 'servers', component: ServersComponent,canActivate:[AuthGuard], children: [
     { path: ':id/edit', component: EditServerComponent, canDeactivate: [CanDeactivateGuard], resolve:{server: ServerResolverService} },
     { path: ':id', canActivate:[AuthGuard], component: ServerComponent }
   ]
   },
+
+
   { path: 'not-found', component: ErrorPageComponent, data: {message: 'Ooopsi! Page not found.'}},
   { path: '**', redirectTo: '/not-found'}
 ];
