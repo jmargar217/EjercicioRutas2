@@ -19,6 +19,10 @@ export class UserService {
     return this.http.post(url, body);
   }
 
+  logout(){
+    localStorage.removeItem("token");
+  }
+
   getToken(){
     return JSON.parse(<string>localStorage.getItem("token"));
   }

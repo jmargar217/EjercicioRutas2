@@ -1,34 +1,30 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
+import { UserService } from '../access-control/services/user.service';
 import { Server } from './interfaces/server.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ServersService {
+  private baseUrl: string = environment.baseUrl;
+  constructor(private http:HttpClient,
+    private userService:UserService) { }
 
-  constructor() { }
-  private servers: Server[] = [
-    {
-      id: 1,
-      name: 'Productionserver',
-      status: 'online'
-    },
-    {
-      id: 2,
-      name: 'Testserver',
-      status: 'offline'
-    },
-    {
-      id: 3,
-      name: 'Devserver',
-      status: 'offline'
-    }
-  ];
+  getServers(){
+    // No funciona
 
-  getServers() : Server[]{
-    return this.servers;
+    const headers = new Headers({
+      "Content-Type": "application/json",
+      "token": this.userService.getToken()
+    });
+
+    const url = `${this.baseUrl}/servers`;
+    return this.http.post(url,{headers});
   }
 
+  /*
   getServer(id: number): Server {
     const server = this.servers.find(
       (s) => {
@@ -37,7 +33,9 @@ export class ServersService {
     );
     return <Server>server;
   }
+  */
 
+  /*
   updateServer(id: number, serverInfo: {name: string, status: string}) {
     const server = this.servers.find(
       (s) => {
@@ -49,4 +47,5 @@ export class ServersService {
       server.status = serverInfo.status;
     }
   }
+  */
 }

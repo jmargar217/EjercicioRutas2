@@ -46,13 +46,13 @@ export class EditServerComponent implements OnInit, CanComponentDeactivate {
 
     this.route.fragment.subscribe();
 
-    this.server = this.serversService.getServer(3);
+    //this.server = this.serversService.getServer(3);
     this.serverName = this.server.name;
     this.serverStatus = this.server.status;
   }
 
   onUpdateServer() {
-    this.serversService.updateServer(this.server.id, {name: this.serverName, status: this.serverStatus});
+    //this.serversService.updateServer(this.server.id, {name: this.serverName, status: this.serverStatus});
     this.changesSaved = true;
     this.router.navigate(['../'], {relativeTo: this.route});
   }
