@@ -1,5 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { UserService } from '../access-control/services/user.service';
 import { Server } from './interfaces/server.interface';
@@ -13,15 +14,19 @@ export class ServersService {
     private userService:UserService) { }
 
   getServers(){
-    // No funciona
+    let token = JSON.parse(<string>localStorage.getItem('token')).access_token;
 
-    const headers = new Headers({
-      "Content-Type": "application/json",
-      "token": this.userService.getToken()
-    });
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    })
+
+    const options = {
+      headers: headers
+    }
 
     const url = `${this.baseUrl}/servers`;
-    return this.http.post(url,{headers});
+    return this.http.get<Server[]>(url,options);
   }
 
   /*
