@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { DatosToken } from '../token.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class UserService {
       'email': email,
       'password': password
     }
-    return this.http.post(url, body);
+    return this.http.post<DatosToken>(url, body);
   }
 
   logout(){
