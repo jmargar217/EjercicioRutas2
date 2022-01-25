@@ -10,6 +10,7 @@ import {
 } from '@angular/router';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import Swal from 'sweetalert2';
 import { LoginService} from './access-control/services/login.service';
 import { DatosToken } from './access-control/token.interface';
 
@@ -37,6 +38,12 @@ export class AuthGuard implements CanActivate, CanActivateChild {
       this.http.get(url,options).subscribe(data =>{
         this.estado = true;
       }, err => {
+        Swal.fire({
+          title: 'Su token ha espirado',
+          text: 'Vuelva a iniciar sesión',
+          icon: 'error',
+          confirmButtonText: 'Ok'
+        })
         console.log(err.message);
         this.estado = false;
       });
