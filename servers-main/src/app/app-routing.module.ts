@@ -19,11 +19,10 @@ const routes: Routes = [
   {path: 'login',component:LoginComponent},
 
 
-  { path: 'users', component: UsersComponent, children: [
+  { path: 'users', component: UsersComponent,canActivate:[AuthGuard], children: [
     { path: ':id/:name', component: UserComponent },
   ]
   },
-
 
   { path: 'servers', component: ServersComponent,canActivate:[AuthGuard], children: [
     { path: ':id/edit', component: EditServerComponent, canDeactivate: [CanDeactivateGuard] }, //resolve:{server: ServerResolverService} },

@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { UserService } from '../access-control/services/user.service';
+import { LoginService} from '../access-control/services/login.service';
 import { Server } from './interfaces/server.interface';
 
 @Injectable({
@@ -10,8 +10,7 @@ import { Server } from './interfaces/server.interface';
 })
 export class ServersService {
   private baseUrl: string = environment.baseUrl;
-  constructor(private http:HttpClient,
-    private userService:UserService) { }
+  constructor(private http:HttpClient) { }
 
   getServers(){
     let token = JSON.parse(<string>localStorage.getItem('token')).access_token;

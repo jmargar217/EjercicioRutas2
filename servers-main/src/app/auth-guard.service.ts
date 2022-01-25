@@ -10,7 +10,7 @@ import {
 } from '@angular/router';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { UserService } from './access-control/services/user.service';
+import { LoginService} from './access-control/services/login.service';
 import { DatosToken } from './access-control/token.interface';
 
 @Injectable({
@@ -19,13 +19,13 @@ import { DatosToken } from './access-control/token.interface';
 export class AuthGuard implements CanActivate, CanActivateChild {
   private baseUrl: string = environment.baseUrl;
   private estado:boolean = false;
-  constructor(private userService:UserService, private router: Router, private http:HttpClient) {}
+  constructor(private loginService:LoginService, private router: Router, private http:HttpClient) {}
 
 
 
   canActivate(route: ActivatedRouteSnapshot,state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    if(this.userService.getToken() != null){
-      let token:DatosToken = this.userService.getToken();
+    if(this.loginService.getToken() != null){
+      let token:DatosToken = this.loginService.getToken();
       const headers = new HttpHeaders({
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token.access_token}`

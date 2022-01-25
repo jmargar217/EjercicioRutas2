@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserService } from '../services/user.service';
+import { LoginService} from '../services/login.service';
 import Swal from 'sweetalert2';
 
 
@@ -15,13 +15,13 @@ export class LoginComponent implements OnInit {
   email!: string;
   password!: string;
 
-  constructor(private userService:UserService,private router:Router) { }
+  constructor(private loginService:LoginService,private router:Router) { }
 
   ngOnInit(): void {
   }
 
   login(){
-    this.userService.login(this.email,this.password)
+    this.loginService.login(this.email,this.password)
     .subscribe( resp => {
 
       localStorage.setItem('token',JSON.stringify(resp));

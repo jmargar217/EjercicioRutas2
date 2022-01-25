@@ -6,7 +6,7 @@ import { DatosToken } from '../token.interface';
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class LoginService {
   private baseUrl: string = environment.baseUrl;
 
   constructor(private http: HttpClient) { }
